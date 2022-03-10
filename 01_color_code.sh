@@ -10,8 +10,10 @@ echo Hello World
 # \e[COLm -> this is to enable color, COL here is one of the above color codes.
 # \[0m -> to disable color code
 
-echo "\e[31mHello World\[0m"
-echo "\e[32mHello World\[0m"
-echo "\e[33mHello World\[0m"
-echo "\e[34mHello World\[0m"
-echo "\e[35mHello World\[0m"
+echo -e "\e[31mHello World\[0m"
+echo -e "\e[32mHello World\[0m"
+echo -e "\e[33mHello World\[0m"
+echo -e "\e[34mHello World\[0m"
+echo -e "\e[35mHello World\[0m"
+
+
