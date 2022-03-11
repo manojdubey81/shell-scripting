@@ -1,1 +1,1 @@
-echo catalogue script
+echo frontend script
