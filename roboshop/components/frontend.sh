@@ -1,6 +1,5 @@
 #!/bin/bash
-#frontend
-
+#
 USER_ID=$(id -u)
 if [ "$USER_ID" -ne 0 ]; then
   echo -e "\e[31mYou should be sudo or root user to run this script as\e[0m"
