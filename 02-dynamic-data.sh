@@ -8,5 +8,5 @@ echo -e "\e[33m Second Value is $b\e[0m"
 
 ADD = $(($a + $b))
 
-echo add = $ADD
+echo Add = $ADD
 
