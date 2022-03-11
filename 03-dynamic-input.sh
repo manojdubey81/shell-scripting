@@ -1,5 +1,5 @@
 #!/bin/bash
 
-read -p "Enter your Name : name "
+read -p "Enter your Name : " name
 
-echo "Your Name is : $name"
+echo -e "\e[33mYour Name is : $name\e[0m"
