@@ -8,5 +8,5 @@ echo -e "\e[33m Second Value is $b\e[0m"
 
 ADD = $(($a + $b))
 
-echo -e "\e[34m Total of above two values is $ADD"
+echo add = $ADD
 
