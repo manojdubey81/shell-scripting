@@ -2,7 +2,7 @@
 
 USER_ID=$(id -u)
 if [ "$USER_ID" -ne 0 ]; then
-  echo You should be sudo or root user to run this script as
+  echo -e "\e[31mYou should be sudo or root user to run this script as\e[0m"
   exit 1
 fi
 
@@ -30,7 +30,7 @@ fi
 
 echo -e "\e[36m Cleanup Old Nginx Content and Extract new downloaded archive \e[0m"
 
-cd /usr/share/nginx/html
+cd /usr/share/nginx/html/
 rm -rf *
 unzip /tmp/frontend.zip
 mv frontend-main/* .
@@ -46,6 +46,5 @@ else
 fi
 
 echo -e "\e[36m Restart Nginx\e[0m"
-
 systemctl restart nginx
 systemctl enable nginx
