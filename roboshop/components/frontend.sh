@@ -9,7 +9,7 @@ fi
 echo -e "\e[36m Installing Nginx\e[0m"
 yum install nginx -y
 
-if [ $? -eq 0]; then
+if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
   echo -e "\e[31mFAILURE\e[0m"
@@ -21,7 +21,7 @@ echo -e "\e[36m Download nginx content\e[0m"
 
 curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
 
-if [ $? -eq 0];then
+if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
   echo -e "\e[31mFAILURE\e[0m"
@@ -38,7 +38,7 @@ mv static/* .
 rm -rf frontend-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 
-if [ $? -eq 0];then
+if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
   echo -e "\e[31mFAILURE\e[0m"
