@@ -1,4 +1,2 @@
-#!/bin/bash
-
 # for commenting
 
