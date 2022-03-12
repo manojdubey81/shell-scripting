@@ -1,7 +1,7 @@
 #!bin/bash
 
 # Validate user root privelage
-USER_ID = $(id -u)
+USER_ID=$(id -u)
 
 if [ "$USER_ID" -ne 0 ]; then
   echo "\e[31m You need root access to execute this script\e[0m"
