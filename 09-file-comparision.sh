@@ -1,6 +1,8 @@
 #!/bin/bash
 
-read -p "Enter your string: " str
+if [ ! -e components/$1.sh ]; then
+	echo “component does not exist”
+	exit 1
+fi
 
-echo "first char of string is : " ${str[0][0]}
-echo "second char of string is : " ${str[0][1]}
+bash component/$1.sh
