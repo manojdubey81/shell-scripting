@@ -33,7 +33,7 @@ fi
 # Updating Listner IP
 echo -e "\e[35m Update Listen IP address from 127.0.0.1 to 0.0.0.0 in config file\e[0m"
 #Config file: `/etc/mongod.conf`
-sed -i -e 's/127.0.0.1/0.0.0.0' /etc/mongod.conf
+sed -i -e "s/127.0.0.1/0.0.0.0" /etc/mongod.conf
 
 if [ "$?" -eq 0 ]; then
   echo -e "\e[32m Listen IP Update Success\e[0m"
