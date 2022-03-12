@@ -1,6 +1,7 @@
 #!/bin/bash
+
 Statcheck () {
-  if [ $? -eq 0 ]; then
+  if [ $1 -eq 0 ]; then
     echo -e "\e[32m- SUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE\e[0m"
@@ -20,26 +21,30 @@ fi
 
 Print "Installing Nginx"
 yum install nginx -y
-Statcheck
+Statcheck $?
 
 Print "Download nginx content"
 
 curl -f -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
-Statcheck
+Statcheck $?
 
 
-Print "Cleanup Old Nginx Content and Extract new downloaded archive"
+Print "Cleanup Old Nginx Content"
+rm -rf /usr/share/nginx/html/*
+Statcheck $?
+
 
 cd /usr/share/nginx/html/
 
-rm -rf *
 unzip /tmp/frontend.zip
 mv frontend-main/* .
 mv static/* .
-rm -rf frontend-main README.md
-mv localhost.conf /etc/nginx/default.d/roboshop.conf
-Statcheck
 
-Print "Restart Nginx"
+Print "Update RoboShop Configuration"
+mv localhost.conf /etc/nginx/default.d/roboshop.conf
+Statcheck $?
+
+Print "Start Nginx"
 systemctl restart nginx
 systemctl enable nginx
+Statcheck $?
