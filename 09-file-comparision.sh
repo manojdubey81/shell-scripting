@@ -1,8 +1,10 @@
 #!/bin/bash
 
 if [ ! -f components/$1.sh ]; then
-	echo “component does not exist”
+	echo “component $1 does not exist”
 	exit 1
+else
+  echo “component $1 exist”
 fi
 
-bash component/$1.sh
+#bash component/$1.sh
