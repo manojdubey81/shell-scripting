@@ -1,4 +1,4 @@
 #!bin/bash
 
-read -ep "\e[32m Enter Your Name: \e[0m" name
+read -p "Enter Your Name: " name
 echo -e "\e[31m Your Name is: \e[0m" $name
