@@ -1,2 +1,4 @@
-# for commenting
+#!bin/bash
+
+echo Thansk Tapas to Join
 
