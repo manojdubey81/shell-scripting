@@ -1,2 +1,2 @@
 #catalogue
-echo catalogue script
+echo Catalogue Script Executed
