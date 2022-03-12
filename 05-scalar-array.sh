@@ -8,4 +8,6 @@ echo -e "\n\e[32m Arrays Third element is : \e[0m" ${a[2]}
 echo -e "\n\e[32m Arrays all element is : \e[0m" ${a[*]}
 
 echo "${a[0]}"
+echo -e "\n" "${a[2]}"
+
 
