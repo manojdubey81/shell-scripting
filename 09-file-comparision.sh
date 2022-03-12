@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f roboshop/components/$1.sh ]; then
+if [ ! -e roboshop/components/$1.sh ]; then
 	echo “component $1 does not exist”
 	exit 1
 else
