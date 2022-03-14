@@ -20,8 +20,13 @@ Print "Switch to nginx"
 cd /usr/share/nginx/html/
 Statcheck $?
 
+Print "Cleanup Old Nginx"
+rm -rf /tmp/frontend.zip &>>LOG_FILE
+Statcheck $? "Old Nginx Cleanup"
+
+
 Print "Extract configuration"
-unzip /tmp/frontend.zip && mv frontend-main/* . && mv static/* . &>>LOG_FILE
+unzip -o /tmp/frontend.zip && mv frontend-main/* . && mv static/* . &>>LOG_FILE
 Statcheck $? "Configuration Extraction"
 
 Print "Update RoboShop Configuration"
