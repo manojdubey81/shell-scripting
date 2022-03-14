@@ -17,4 +17,4 @@ if [ "$USER_ID" -ne 0 ]; then
   exit 1
 fi
 
-LOG_FILE="/tmp/roboshop.log"
+LOG_FILE=/tmp/roboshop.log
