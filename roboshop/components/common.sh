@@ -16,3 +16,5 @@ if [ "$USER_ID" -ne 0 ]; then
   echo -e "\e[31mYou should be sudo or root user to run this script as\e[0m"
   exit 1
 fi
+
+LOG_FILE="/tmp/roboshop.log"
