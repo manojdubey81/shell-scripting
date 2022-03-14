@@ -2,45 +2,39 @@
 
 source components/common.sh
 
-# Download Mongodb Configuration
-Print "Download mongodb configuration"
-curl -f -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
-Statcheck $? "Mongodb configuration Downloaded"
+Print "Download mongodb repos"
+curl -f -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>$LOG_FILE
+Statcheck $? "Mongodb repos Downloaded-"
 
-# Installing Mongodb
 Print "Install Mongodb"
-yum install -y mongodb-org
-Statcheck $? "Mongodb Installation"
+yum install -y mongodb-org &>>$LOG_FILE
+Statcheck $? "Mongodb Installation-"
 
-# Updating Listner IP
-Print "Update Listen IP address from 127.0.0.1 to 0.0.0.0 in config file"
+Print "Update Listen IP"
 #Config file: `/etc/mongod.conf`
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
-Statcheck $? "Listener IP Updated"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>LOG_FILE
+Statcheck $? "Listener IP Updated-"
 
-# Start Mongodb
 Print "Start mongodb"
-systemctl enable mongod && systemctl restart mongod
-Statcheck $? "MongoDB Started"
+systemctl enable mongod && systemctl restart mongod &>>LOG_FILE
+Statcheck $? "MongoDB Started-"
 
-## Every Database needs the schema to be loaded for the application to work.
-Print "Download schema archive and load it"
+Print "Download mongodb schema"
+curl -f -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>LOG_FILE
+Statcheck $? "Mongodb Schema Downloaded-"
 
-curl -f -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
-Statcheck $? "Schema archive downloaded"
+Print "Extract mongodb schema"
+
+cd /tmp && unzip -o mongodb.zip &>>LOG_FILE
+Statcheck $? "Mongodb Schema Extracted-"
 
 
-cd /tmp
-unzip mongodb.zip
 cd mongodb-main
 
-Print "Catalogue schema download"
-mongo < catalogue.js
-Statcheck $? "Catalogue schema installed"
-
-
-Print "User schema download"
-mongo < users.js
-Statcheck $? "User schema installed"
+for schema in catalogue users; do
+  echo "Load $schema schema"
+   mongo < ${schema}.js &>>LOG_FILE
+   Statcheck $? "$schema schema installed"
+done
 
 echo -e "\e[32m MongoDB Ready to Use\e[0m"

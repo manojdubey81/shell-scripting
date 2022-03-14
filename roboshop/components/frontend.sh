@@ -19,7 +19,7 @@ cd /usr/share/nginx/html/
 
 
 Print "Extract configuration"
-unzip /tmp/frontend.zip && mv frontend-main/* . && mv static/* . &>>$LOG_FILE
+unzip -o /tmp/frontend.zip && mv frontend-main/* . && mv static/* . &>>$LOG_FILE
 Statcheck $? "Configuration Extraction-"
 
 Print "RoboShop Configuration Update"
