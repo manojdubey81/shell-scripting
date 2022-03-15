@@ -11,8 +11,12 @@ Print "Install NodeJS"
 StatusChk $? "NodeJS Install"
 
 Print "Add Deamon user"
-useradd roboshop &>>"${LOG_FILE}"
-StatusChk $? "Deamon Useradd"
+id roboshop  &>>"${LOG_FILE}"
+if [ $? -ne 0 ]; then
+  Print "Add Application User"
+  useradd roboshop &>>"${LOG_FILE}"
+  StatusChk $? "Deamon Useradd"
+fi
 
 Print "Download catalogue archive"
 curl -f -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>"${LOG_FILE}"
