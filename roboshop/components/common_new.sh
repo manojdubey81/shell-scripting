@@ -4,7 +4,7 @@ if [ "$USER_ID" -ne 0 ]; then
   exit 1
 fi
 
-Statcheck () {
+Statuschk () {
   if [ $1 -eq 0 ]; then
     echo -e "\e[32m$2-SUCCESS\e[0m"
   else
