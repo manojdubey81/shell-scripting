@@ -4,7 +4,7 @@ source components/common_new.sh
 
 Print "Install Nginx"
 yum install nginx -y &>>${LOG_FILE}
-StatusChk $? "Nginx Install"
+StatusChk $? " Nginx Install"
 
 Print "Download frontend archive"
 curl -f -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>${LOG_FILE}
