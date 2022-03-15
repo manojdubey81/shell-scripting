@@ -20,3 +20,6 @@ payment:
 	bash components/payment.sh
 dispatch:
 	bash components/dispatch.sh
+
+frontend_new:
+	bash components/frontend_new.sh

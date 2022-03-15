@@ -56,10 +56,10 @@ NodeJS() {
   Statuschk &? "npm Installed-"
 
   Print "Setup SystemD File"
-  sed -i -e 's/MONGO_DNSNAME/mongodb.${APP_USER}.internal/'
-         -e 's/REDIS_ENDPOINT/redis.${APP_USER}.internal/'
-         -e 's/MONGO_ENDPOINT/mongodb.${APP_USER}.internal/'
-         -e 's/CATALOGUE_ENDPOINT/catalogue.${APP_USER}.internal/'
+  sed -i -e 's/MONGO_DNSNAME/mongodb.${APP_USER}.internal/' \
+         -e 's/REDIS_ENDPOINT/redis.${APP_USER}.internal/'  \
+         -e 's/MONGO_ENDPOINT/mongodb.${APP_USER}.internal/' \
+         -e 's/CATALOGUE_ENDPOINT/catalogue.${APP_USER}.internal/' \
          /home/${APP_USER}/${COMPONENT}/systemd.service &>>${LOG_FILE}
          && mv /home/${APP_USER}/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service  &>>${LOG_FILE}
   StatCheck $? "SystemD File Updated-"
