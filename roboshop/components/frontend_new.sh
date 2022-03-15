@@ -26,3 +26,4 @@ Print "Restart Nginx"
 systemctl enable nginx &>>${LOG_FILE} && systemctl restart nginx &>>${LOG_FILE}
 StatusChk $? "Nginx Restart"
 
+echo -e "\e[34m Nginx Machine Ready\e[0m"
