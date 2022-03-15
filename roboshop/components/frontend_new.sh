@@ -22,6 +22,11 @@ Print "Move config to default location"
 mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
 StatusChk $? "Nginx Default Location Setup"
 
+Print "Update config file"
+sed -i -e '/catalogue/s/localhost/172.31.85.219/' \
+          /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
+StatusChk $? "Configuration Updated"
+
 Print "Restart Nginx"
 systemctl enable nginx &>>${LOG_FILE} && systemctl restart nginx &>>${LOG_FILE}
 StatusChk $? "Nginx Restart"
