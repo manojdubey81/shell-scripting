@@ -23,6 +23,7 @@ dispatch:
 
 frontend_new:
 	bash components/frontend_new.sh
-
 mongodb_new:
 	bash components/mongodb_new.sh
+catalogue_new:
+	bash components/catalogue_new.sh
