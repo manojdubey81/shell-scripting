@@ -2,5 +2,5 @@
 
 Source components/common.sh
 
-COMPONENT=catalogue
+COMPONENT=user
 NodeJS
