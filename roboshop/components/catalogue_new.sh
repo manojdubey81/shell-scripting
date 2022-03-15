@@ -30,7 +30,7 @@ Print "Update mongodb private IP in SystemD file"
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>"${LOG_FILE}"
 StatusChk $? "systemd file moved to default location"
 
-sed -i -e '/MONGO_DNSNAME/mongodb private ip/' /etc/systemd/system/catalogue.service &>>"${LOG_FILE}"
+sed -i -e '/MONGO_DNSNAME/mongodb_private_ip/' /etc/systemd/system/catalogue.service &>>"${LOG_FILE}"
 StatusChk $? "MONGO_DNSNAME Updated"
 
 Print "Restart deamon"
