@@ -2,7 +2,7 @@ Statcheck () {
   if [ $1 -eq 0 ]; then
     echo -e "\e[32m$2 SUCCESS\e[0m"
   else
-    echo -e "$2 \e[31m$2 FAILURE\e[0m"
+    echo -e "\e[31m$2 FAILURE\e[0m"
     exit 2
   fi
 }
