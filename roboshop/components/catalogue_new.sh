@@ -3,7 +3,7 @@
 source components/common_new.sh
 
 Print "Extract Yum Repo for NodeJS"
-curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG_FIlE}
+curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash - &>>${LOG_FIlE}
 StatusChk $? "NodeJS Repo Extraction"
 
 Print "Install NodeJS"
