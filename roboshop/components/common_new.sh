@@ -62,7 +62,7 @@ NodeJS() {
   StatCheck $? "Permissions Setup"
 
   Print "Setup SystemD file"
-  sed -i -e '/MONGO_DNSNAME/${MONGODB_IP}/' \
+  sed -i -e '/MONGO_DNSNAME/mongodb.roboshop.internal/' \
         /etc/systemd/system/${COMPONENT}.service &>>${LOG_FILE} &&\
         mv /home/${APP_USER}/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>${LOG_FILE}
   StatusChk $? "MONGO_DNSNAME Updated"
