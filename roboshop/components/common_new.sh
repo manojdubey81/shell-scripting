@@ -47,7 +47,7 @@ NodeJS() {
 
   Print "CleanUp Old Content"
   rm -rf /home/${APP_USER}/${COMPONENT} &>>${LOG_FILE}
-  StatCheck $? "CleanUp Old ${COMPONENT}"
+  StatusChk $? "CleanUp Old ${COMPONENT}"
 
   Print "Extract and Load ${COMPONENT} content"
   cd /home/${APP_USER} &>>${LOG_FILE} && unzip -o /tmp/${COMPONENT}.zip &>>${LOG_FILE} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOG_FILE}
@@ -63,7 +63,7 @@ NodeJS() {
 
   Print "Setup SystemD file"
   sed -i -e '/MONGO_DNSNAME/mongodb.roboshop.internal/' \
-        /etc/systemd/system/${COMPONENT}.service &>>${LOG_FILE} &&\
+        /home/${APP_USER}/${COMPONENT}/systemd.service &>>${LOG_FILE} &&\
         mv /home/${APP_USER}/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>${LOG_FILE}
   StatusChk $? "MONGO_DNSNAME Updated"
 
