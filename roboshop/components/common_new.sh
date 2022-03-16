@@ -63,8 +63,8 @@ NodeJS() {
 
   Print "Setup SystemD file"
   sed -i -e '/MONGO_DNSNAME/mongodb.roboshop.internal/' \
-        /home/${APP_USER}/${COMPONENT}/systemd.service &>>${LOG_FILE} &&\
-        mv /home/${APP_USER}/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>${LOG_FILE}
+            /home/${APP_USER}/${COMPONENT}/systemd.service &>>${LOG_FILE} && \
+            mv /home/${APP_USER}/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>${LOG_FILE}
   StatusChk $? "MONGO_DNSNAME Updated"
 
   Print "Restart ${COMPONENT} Service"
