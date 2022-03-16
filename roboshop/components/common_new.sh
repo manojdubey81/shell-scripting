@@ -56,7 +56,7 @@ NodeJS() {
   mv /home/"${APP_USER}"/"${COMPONENT}"/systemd.service /etc/systemd/system/"${COMPONENT}".service &>>"${LOG_FILE}"
   StatusChk $? "systemd file moved to default location"
 
-  sed -i -e '/MONGO_DNSNAME/mongodb_private_ip/' /etc/systemd/system/"${COMPONENT}".service &>>"${LOG_FILE}"
+  sed -i -e '/MONGO_DNSNAME/"${MONGODB_IP}"/' /etc/systemd/system/"${COMPONENT}".service &>>"${LOG_FILE}"
   StatusChk $? "MONGO_DNSNAME Updated"
 
   Print "Restart deamon"
