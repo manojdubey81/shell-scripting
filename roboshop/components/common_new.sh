@@ -61,8 +61,16 @@ NodeJS() {
   chown -R ${APP_USER}:${APP_USER} /home/${APP_USER}
   StatCheck $? "Permissions Setup"
 
-  Print "Setup SystemD file"
-  sed -i -e '/MONGO_DNSNAME/mongodb.roboshop.internal/' \
+  Print "Setup SystemD File"
+    sed -i  -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' \
+            -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' \
+            -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' \
+            -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' \
+            -e 's/CARTENDPOINT/cart.roboshop.internal/' \
+            -e 's/DBHOST/mysql.roboshop.internal/' \
+            -e 's/CARTHOST/cart.roboshop.internal/' \
+            -e 's/USERHOST/user.roboshop.internal/' \
+            -e 's/AMQPHOST/rabbitmq.roboshop.internal/' \
             /home/${APP_USER}/${COMPONENT}/systemd.service &>>${LOG_FILE} && \
             mv /home/${APP_USER}/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>${LOG_FILE}
   StatusChk $? "MONGO_DNSNAME Updated"
