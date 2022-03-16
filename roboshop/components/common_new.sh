@@ -79,5 +79,6 @@ NodeJS() {
   systemctl daemon-reload &>>${LOG_FILE} && systemctl restart ${COMPONENT} &>>${LOG_FILE} && systemctl enable ${COMPONENT} &>>${LOG_FILE}
   StatusChk $? "${COMPONENT} Service Restart"
 
+  echo "\n------------${COMPONENT}--------------"
   echo -e "\e[32m ${COMPONENT} Ready to Use\e[0m"
 }
