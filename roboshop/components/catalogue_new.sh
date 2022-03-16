@@ -23,7 +23,7 @@ curl -f -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/
 StatusChk $? "catalogue archive downloaded"
 
 Print "Extract and Load catalogue repo"
-cd /home/roboshop && unzip -o /tmp/catalogue.zip &>>"${LOG_FILE}" && mv catalogue-main catalogue &>>"${LOG_FILE}"
+cd /home/roboshop && unzip -o /tmp/catalogue.zip &>>"${LOG_FILE}" && mv -o catalogue-main catalogue &>>"${LOG_FILE}"
 StatusChk $? "Extraction of catalogue"
 
 Print "npm Install"
