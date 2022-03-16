@@ -45,7 +45,7 @@ NodeJS() {
   StatusChk $? "${COMPONENT} archive downloaded"
 
   Print "Extract and Load ${COMPONENT} repo"
-  cd /home/"${APP_USER}" && unzip -o /tmp/"${COMPONENT}".zip &>>"${LOG_FILE}" && mv -o "${COMPONENT}"-main "${COMPONENT}" &>>"${LOG_FILE}"
+  cd /home/"${APP_USER}" && unzip -o /tmp/"${COMPONENT}".zip &>>"${LOG_FILE}" && mv "${COMPONENT}"-main "${COMPONENT}" &>>"${LOG_FILE}"
   StatusChk $? "Extraction of ${COMPONENT}"
 
   Print "npm Install"
