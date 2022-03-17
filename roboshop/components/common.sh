@@ -47,7 +47,7 @@ APP_SETUP() {
 
     if [ "${COMPONENT}" = dispatch ]; then
       Print "Build ${COMPONENT} dependencies"
-      cd "${COMPONENT} &>>${LOG_FILE} && go mod init "${COMPONENT}" &>>${LOG_FILE} && go get && go build &>>${LOG_FILE}
+      cd "${COMPONENT}" &>>${LOG_FILE} && go mod init "${COMPONENT}" &>>${LOG_FILE} && go get && go build &>>${LOG_FILE}
       StatusChk $? "Build for ${COMPONENT}"
     fi
 }
