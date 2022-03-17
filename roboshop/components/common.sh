@@ -45,7 +45,7 @@ APP_SETUP() {
     cd /home/${APP_USER} &>>${LOG_FILE} && unzip -o /tmp/${COMPONENT}.zip &>>${LOG_FILE} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOG_FILE}
     StatusChk $? "Extraction of ${COMPONENT}"
 
-    if [ "$[COMPONENT" = dispatch ]; then
+    if [ "${COMPONENT}" = dispatch ]; then
       Print "Build ${COMPONENT} dependencies"
       cd "${COMPONENT} &>>${LOG_FILE} && go mod init "${COMPONENT}" &>>${LOG_FILE} && go get && go build &>>${LOG_FILE}
       StatusChk $? "Build for ${COMPONENT}"
