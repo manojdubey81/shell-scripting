@@ -93,3 +93,56 @@ NodeJS() {
     echo -e "\n------------${COMPONENT}--------------"
     echo -e "\e[32m ${COMPONENT} Ready to Use\e[0m"
 }
+
+
+MAVIN() {
+
+  Print "Install Maven"
+  yum install maven -y &>>${LOG_FILE}
+  StatusChk $? "Maven Install"
+
+  APP_SETUP
+
+  Print "Maven Packaging"
+  cd /home/${APP_USER}/${COMPONENT} &&  mvn clean package &>>${LOG_FILE} && mv target/shipping-1.0.jar shipping.jar &>>${LOG_FILE}
+  StatCheck $? "Maven Packaging Install"
+
+  SERVICE_SETUP
+
+  echo -e "\n------------${COMPONENT}--------------"
+  echo -e "\e[32m ${COMPONENT} Ready to Use\e[0m"
+}
+
+
+PYTHON() {
+
+  Print "Install Python"
+  yum install python36 gcc python3-devel -y &>>${LOG_FILE}
+  StatusChk $? "Python Installation"
+
+  APP_SETUP
+
+  Print "Install Python Dependencies"
+  cd /home/${APP_USER}/${COMPONENT} && pip3 install -r requirements.txt &>>${LOG_FILE}
+  StatusChk $? "Python Dependencies Install"
+
+  SERVICE_SETUP
+
+  echo -e "\n------------${COMPONENT}--------------"
+  echo -e "\e[32m ${COMPONENT} Ready to Use\e[0m"
+}
+
+
+GOLANG() {
+
+  Print "Install GoLang"
+  yum install golang -y &>>${LOG_FILE}
+  StatusChk $? "GoLang Installation"
+
+  APP_SETUP
+
+  SERVICE_SETUP
+
+  echo -e "\n------------${COMPONENT}--------------"
+  echo -e "\e[32m ${COMPONENT} Ready to Use\e[0m"
+}
