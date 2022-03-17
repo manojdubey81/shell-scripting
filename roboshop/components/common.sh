@@ -139,7 +139,7 @@ PYTHON() {
 }
 
 
-GOLANG() {
+GOLANG()  {
 
   Print "Install GoLang"
   yum install golang -y &>>${LOG_FILE}
