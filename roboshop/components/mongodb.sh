@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source components/common_new.sh
+source components/common.sh
 
 Print "Download Yum Repos for MongoDB"
 curl -f -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>${LOG_FILE}

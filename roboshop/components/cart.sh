@@ -1,5 +1,5 @@
 #!/bin/bash
 
-source components/common_new.sh
+source components/common.sh
 COMPONENT=cart
 NodeJS

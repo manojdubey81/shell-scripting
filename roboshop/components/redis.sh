@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source components/common_new.sh
+source components/common.sh
 
 Print "Download Yum Repos"
 curl -f -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo &>>${LOG_FILE}
