@@ -30,7 +30,7 @@ StatusChk $? "Schema Extracted"
 Print "Schema Download"
 cd mongodb-main
 for schema in catalogue users; do
-  echo "Load $schema schema"
+  echo "Load ${schema} schema"
   mongo < ${schema}.js &>>${LOG_FILE}
   StatusChk $? "${schema} Schema Downloaded"
 done
