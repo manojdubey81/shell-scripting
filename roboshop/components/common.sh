@@ -149,29 +149,3 @@ GOLANG()  {
     SERVICE_SETUP
     Readymsg
 }
-
-ERLANG()  {
-
-    Print "Configure Yum repos"
-    curl -f -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash - &>>${LOG_FILE}
-    StatusChk $? "${COMPONENT} Repo Extraction"
-
-    Print "Install ${COMPONENT}"
-    yum install rabbitmq-server -y &>>${LOG_FILE}
-    StatusChk $? "${COMPONENT} Install"
-
-    Print "Restart ${COMPONENT} Service"
-    systemctl restart ${COMPONENT}-server &>>${LOG_FILE} && systemctl enable ${COMPONENT}-server &>>${LOG_FILE}
-    StatusChk $? "${COMPONENT} Service Restart"
-
-    id ${APP_USER}  &>>${LOG_FILE}
-    if [ $? -ne 0 ]; then
-        Print "Create Application User"
-        rabbitmqctl add_user ${APP_USER} ${APP_USER}123 &>>${LOG_FILE} && \
-        rabbitmqctl set_user_tags ${APP_USER} administrator &>>${LOG_FILE} && \
-        rabbitmqctl set_permissions -p / ${APP_USER} ".*" ".*" ".*"
-        StatusChk $? "User Creation"
-    fi
-
-    Readymsg
-}
