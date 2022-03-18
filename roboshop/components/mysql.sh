@@ -42,3 +42,5 @@ StatusChk $? "Extract Schema"
 Print "Load Schema"
 cd mysql-main && mysql -u root -pRoboShop@1 <shipping.sql &>>${LOG_FILE}
 StatusChk $? "Load Schema"
+
+Readymsg

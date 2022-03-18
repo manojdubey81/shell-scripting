@@ -18,6 +18,11 @@ Print() {
   echo -e "\e[35m $1 \e[0m"
 }
 
+Readymsg() {
+  echo -e "\n------------${COMPONENT}--------------"
+  echo -e "\e[32m ${COMPONENT} Ready to Use\e[0m"
+}
+
 LOG_FILE=/tmp/roboshop.log
 rm -f ${LOG_FILE}
 
@@ -95,60 +100,78 @@ NodeJS() {
     StatusChk $? "App Dependencies Install"
 
     SERVICE_SETUP
-
-    echo -e "\n------------${COMPONENT}--------------"
-    echo -e "\e[32m ${COMPONENT} Ready to Use\e[0m"
+    Readymsg
 }
 
 
 MAVIN() {
 
-  Print "Install Maven"
-  yum install maven -y &>>${LOG_FILE}
-  StatusChk $? "Maven Install"
+    Print "Install Maven"
+    yum install maven -y &>>${LOG_FILE}
+    StatusChk $? "Maven Install"
 
-  APP_SETUP
+    APP_SETUP
 
-  Print "Maven Packaging"
-  cd /home/${APP_USER}/${COMPONENT} &&  mvn clean package &>>${LOG_FILE} && mv target/shipping-1.0.jar shipping.jar &>>${LOG_FILE}
-  StatCheck $? "Maven Packaging Install"
+    Print "Maven Packaging"
+    cd /home/${APP_USER}/${COMPONENT} &&  mvn clean package &>>${LOG_FILE} && mv target/shipping-1.0.jar shipping.jar &>>${LOG_FILE}
+    StatCheck $? "Maven Packaging Install"
 
-  SERVICE_SETUP
-
-  echo -e "\n------------${COMPONENT}--------------"
-  echo -e "\e[32m ${COMPONENT} Ready to Use\e[0m"
+    SERVICE_SETUP
+    Readymsg
 }
 
 
 PYTHON() {
 
-  Print "Install Python"
-  yum install python36 gcc python3-devel -y &>>${LOG_FILE}
-  StatusChk $? "Python Installation"
+    Print "Install Python"
+    yum install python36 gcc python3-devel -y &>>${LOG_FILE}
+    StatusChk $? "Python Installation"
 
-  APP_SETUP
+    APP_SETUP
 
-  Print "Install Python Dependencies"
-  cd /home/${APP_USER}/${COMPONENT} && pip3 install -r requirements.txt &>>${LOG_FILE}
-  StatusChk $? "Python Dependencies Install"
+    Print "Install Python Dependencies"
+    cd /home/${APP_USER}/${COMPONENT} && pip3 install -r requirements.txt &>>${LOG_FILE}
+    StatusChk $? "Python Dependencies Install"
 
-  SERVICE_SETUP
-
-  echo -e "\n------------${COMPONENT}--------------"
-  echo -e "\e[32m ${COMPONENT} Ready to Use\e[0m"
+    SERVICE_SETUP
+    Readymsg
 }
 
 
 GOLANG()  {
 
-  Print "Install GoLang"
-  yum install golang -y &>>${LOG_FILE}
-  StatusChk $? "GoLang Installation"
+    Print "Install GoLang"
+    yum install golang -y &>>${LOG_FILE}
+    StatusChk $? "GoLang Installation"
 
-  APP_SETUP
+    APP_SETUP
 
-  SERVICE_SETUP
+    SERVICE_SETUP
+    Readymsg
+}
 
-  echo -e "\n------------${COMPONENT}--------------"
-  echo -e "\e[32m ${COMPONENT} Ready to Use\e[0m"
+ERLANG()  {
+
+    Print "Configure Yum repos"
+    curl -f -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash - &>>${LOG_FILE}
+    StatusChk $? "${COMPONENT} Repo Extraction"
+
+    Print "Install ${COMPONENT}"
+    yum yum install rabbitmq-server -y &>>${LOG_FILE}
+    StatusChk $? "NodeJS Install"
+
+    Print "Restart ${COMPONENT} Service"
+    systemctl restart ${COMPONENT}-server &>>${LOG_FILE} && systemctl enable ${COMPONENT}-server &>>${LOG_FILE}
+    StatusChk $? "${COMPONENT} Service Restart"
+
+    id ${APP_USER}  &>>${LOG_FILE}
+    if [ $? -ne 0 ]; then
+        Print "Create Application User"
+        rabbitmqctl add_user ${APP_USER} ${APP_USER}123 &>>${LOG_FILE} && \
+        rabbitmqctl set_user_tags ${APP_USER} administrator &>>${LOG_FILE} && \
+        rabbitmqctl set_permissions -p / ${APP_USER} ".*" ".*" ".*"
+        StatusChk $? "User Creation"
+    fi
+
+    Readymsg
 }

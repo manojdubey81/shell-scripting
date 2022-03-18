@@ -24,3 +24,5 @@ SatusChk $? "Redis Config Update"
 Print "Start Redis Database"
 systemctl enable redis &>>${LOG_FILE} &&  systemctl restart redis &>>${LOG_FILE}
 StatusChk $? "Redis Started"
+
+Readymsg

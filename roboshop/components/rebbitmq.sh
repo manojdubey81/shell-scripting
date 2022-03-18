@@ -1,4 +1,8 @@
 #!/bin/bash
 
-source component/common.sh
+source components/common.sh
+
+COMPONENT=rebitmq
+## Function
+ERLANG
 

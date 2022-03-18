@@ -35,5 +35,5 @@ for schema in catalogue users; do
   StatusChk $? "${schema} Schema Downloaded"
 done
 
-echo -e "\e[32m MongoDB Ready to Use\e[0m"
+Readymsg
 
