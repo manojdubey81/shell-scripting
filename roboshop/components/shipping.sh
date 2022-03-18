@@ -4,4 +4,4 @@ source components/common.sh
 
 COMPONENT=shipping
 ## Function
-MAVEN
+MAVIN
