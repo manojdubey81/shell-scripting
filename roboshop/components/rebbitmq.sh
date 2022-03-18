@@ -2,7 +2,7 @@
 
 source components/common.sh
 
-COMPONENT=rebitmq
+COMPONENT=rebbimq
 ## Function
 ERLANG
 
