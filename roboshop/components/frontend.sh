@@ -18,14 +18,13 @@ Print "Deploy in Nginx Default Location"
 cd /usr/share/nginx/html &>>${LOG_FILE} && unzip -o /tmp/frontend.zip &>>${LOG_FILE} && mv frontend-main/* . &>>${LOG_FILE} && mv static/* . &>>${LOG_FILE}
 StatusChk $? "Nginx Deplyement"
 
-Print "Move config to default location"
-mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
-StatusChk $? "Nginx Default Location Setup"
-
-Print "Update config file"
-sed -i -e '/catalogue/s/localhost/172.31.85.219/' \
-          /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
-StatusChk $? "Configuration Updated"
+Print "Update RoboShop Configuration"
+mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG_FILE
+for component in catalogue user cart shipping payment dispatch; do
+  echo -e "Updating $component in Configuration"
+  sed -i -e "/${component}/s/localhost/${component}.roboshop.internal/"  /etc/nginx/default.d/roboshop.conf
+  StatusChk $? "Configuration Updated"
+done
 
 Print "Restart Nginx"
 systemctl enable nginx &>>${LOG_FILE} && systemctl restart nginx &>>${LOG_FILE}
