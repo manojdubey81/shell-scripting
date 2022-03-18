@@ -104,7 +104,7 @@ NodeJS() {
 }
 
 
-MAVIN() {
+MAVEN() {
 
     Print "Install Maven"
     yum install maven -y &>>${LOG_FILE}
