@@ -157,8 +157,8 @@ ERLANG()  {
     StatusChk $? "${COMPONENT} Repo Extraction"
 
     Print "Install ${COMPONENT}"
-    yum yum install rabbitmq-server -y &>>${LOG_FILE}
-    StatusChk $? "NodeJS Install"
+    yum install rabbitmq-server -y &>>${LOG_FILE}
+    StatusChk $? "${COMPONENT} Install"
 
     Print "Restart ${COMPONENT} Service"
     systemctl restart ${COMPONENT}-server &>>${LOG_FILE} && systemctl enable ${COMPONENT}-server &>>${LOG_FILE}
