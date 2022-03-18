@@ -18,7 +18,7 @@ fi
 if [ -f /etc/redis/redis.conf ]; then
   sed -i -e 's/127.0.0.1/0.0.0.0/' //etc/redis/redis.conf &>>${LOG_FILE}
 fi
-SatusChk $? "Redis Config Update"
+StatusChk $? "Redis Config Update"
 
 
 Print "Start Redis Database"
