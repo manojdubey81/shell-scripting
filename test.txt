@@ -1,0 +1,6 @@
+#!bin/bash
+
+echo Hello World
+
+## Color Codes : Red-> 31, Green-> 32, Yellow-> 33, Blue-> 34, Megenta-> 35, Cyan-> 36
+# Syntax : echo -e "\e[31mHello\[0m"
