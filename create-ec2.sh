@@ -23,8 +23,8 @@ AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Pra
         | jq '.Images[].ImageId' | sed -e 's/"//g')
 
 aws ec2 run-instances \
-      --image-id "${AMI_ID} \
+      --image-id "${AMI_ID}" \
       --instance-type "${INST_TYPE}" \
-      --security-group-ids ${SG_ID} \
-      --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]' \
+      --security-group-ids "${SG_ID}" \
+      --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]" \
       | jq
