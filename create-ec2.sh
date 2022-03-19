@@ -26,8 +26,5 @@ aws ec2 run-instances \
       --image-id "${AMI_ID} \
       --instance-type "${INST_TYPE}" \
       --security-group-ids ${SG_ID} \
-      --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]" \
+      --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]' \
       | jq
-
-
-
