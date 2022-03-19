@@ -31,7 +31,3 @@ aws ec2 run-instances \
       --security-group-ids "${SG_ID}" \
       --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]" \
       | jq
-
-PUB_HOST_ZONE=$(aws route53 create-hosted-zone --name roboshop.com --caller-reference "$(date)")
-PVT_HOST_ZONE=$(aws route53 create-hosted-zone --name roboshop.internal --vpc VPCRegion="us-east-1",VPCId=${VPC_ID} --caller-reference "$(date)")
-
