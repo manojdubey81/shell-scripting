@@ -3,7 +3,9 @@
 if [ -z "$1" ]; then
   echo -e '\e[34mMachine Name Required\e[0m'
   exit 1
-elif [ -z "$2" ] th en
+fi
+
+if [ -z "$2" ] th en
   echo -e '\e[34mInstance type must needed\e[0m'
   exit 2
 fi
