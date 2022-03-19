@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-  echo -e '\e[34m Machine Name Required\e[0m'
+  echo -e '\e[34mMachine Name Required\e[0m'
   exit 1
 fi
 
@@ -16,6 +16,6 @@ aws ec2 run-instances \
 
 
 SG_ID=$(aws ec2 describe-security-groups \
-        --filters "Name=group-name,Values=allow-all-sgp" \
+        --filters Name=group-name,Values=allow-all-sgp \
           | jq '.SecurityGroups[].GroupId' \
           | sed -e 's/"//g')
