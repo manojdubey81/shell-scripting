@@ -10,6 +10,6 @@ COMPONENT="$1"
 aws ec2 run-instances \
       --image-id ami-0bb6af715826253bf \
       --instance-type t2.micro \
-      --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}]" \
+      --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]" \
       | jq
 
