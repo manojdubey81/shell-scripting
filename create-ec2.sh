@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-  echo -e '\e[31m Machine Name Required\e[0m'
+  echo -e '\e[34m Machine Name Required\e[0m'
   exit 1
 fi
 
