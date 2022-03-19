@@ -5,7 +5,7 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-if [ -z "$2" ] th en
+if [ -z "$2" ]; then
   echo -e '\e[34mInstance type must needed\e[0m'
   exit 2
 fi
