@@ -31,3 +31,6 @@ aws ec2 run-instances \
       --security-group-ids "${SG_ID}" \
       --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]" \
       | jq
+
+IPADDRESS=$(aws ec2 describe-instances | jq '.Reservations[].Instances[].PrivateIpAddress' | sed -e 's/"//g')
+
