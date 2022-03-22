@@ -22,8 +22,6 @@ SG_ID=$(aws ec2 describe-security-groups \
 AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" \
         | jq '.Images[].ImageId' | sed -e 's/"//g')
 
-VPC_ID=$(aws ec2 describe-vpcs | jq '.Vpcs[].VpcId' | sed -e 's/"//g')
-
 
 aws ec2 run-instances \
       --image-id "${AMI_ID}" \
