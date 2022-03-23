@@ -18,7 +18,7 @@ PRIVATE_IP=$(aws ec2 describe-instances \
         --filters "Name=tag:Name,Values=${COMPONENT}" \
         --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text)
 
-if [  -z "${PRIVATE_IP}" ]; then
+if [ -z "${PRIVATE_IP}" ]; then
     echo  "  "
     echo -e  "\e[33mInstance ${COMPONENT} is already exists, Please check\e[0m"
     echo -e "----------------------------------------------------\n"
@@ -36,7 +36,7 @@ SG_ID=$(aws ec2 describe-security-groups \
             | sed -e 's/"//g')
 
 if [ -z "{SG_ID}" ] ; then
-    echo -e "\e[1;33m Security Group allow-all-ports does not exist"
+    echo -e "\e[1;33m Security Group allow-all-sgp does not exist"
     echo -e "----------------------------------------------------\n"
     exit 4
 else
@@ -54,7 +54,6 @@ if [ -z "${AMI_ID}" ]; then
 else
     echo -e "\e[1;32mAMI ID = ${AMI_ID}\e[0m"
     echo -e "----------------------------------------------------\n"
-    exit 5
 fi
 
 
