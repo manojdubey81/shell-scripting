@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-  echo -e '\e[32mPlease Select Machine Name:\e[0m'
+  echo -e '\e[32mPlease Select Machine Name!!\e[0m'
   exit 1
 fi
 
@@ -15,12 +15,8 @@ COMPONENT="$1"
 INST_TYPE="$2"
 
 PRIVATE_IP=$(aws ec2 describe-instances \
-            | jq '.Reservations[].Instances[].PrivateIpAddress' \
-            | sed -e 's/"//g')
-
-#PRIVATE_IP=$(aws ec2 describe-instances \
-#        --filters "Name=tag:Name,Values=${COMPONENT}" \
-#        --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text)
+        --filters "Name=tag:Name,Values=${COMPONENT}" \
+        --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text)
 
 if [ ! -z "${PRIVATE_IP}" ]; then
     echo  "  "
@@ -33,6 +29,11 @@ else
     echo -e "----------------------------------------------------\n"
 fi
 
+IPADDRESS=$(aws ec2 describe-instances \
+            | jq '.Reservations[].Instances[].PrivateIpAddress' \
+            | sed -e 's/"//g')
+
+echo "IPADDRESS : " $IPADDRESS
 
 SG_ID=$(aws ec2 describe-security-groups \
           --filters Name=group-name,Values=allow-all-sgp \
