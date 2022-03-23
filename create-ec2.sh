@@ -19,7 +19,8 @@ PRIVATE_IP=$(aws ec2 describe-instances \
         --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text)
 
 if [ ! -z "${PRIVATE_IP}" ]; then
-    echo -e  "\e[31m Instance ${COMPONENT} is already exists, Hence not creating\e[0m"
+    echo -e  "\e[32m Instance ${COMPONENT} is already exists, Hence not creating\e[0m"
+    exit 3
 fi
 
 
@@ -28,9 +29,9 @@ SG_ID=$(aws ec2 describe-security-groups \
             | jq '.SecurityGroups[].GroupId' \
             | sed -e 's/"//g')
 
-if [ -z "{SG_ID}"] ; then
+if [ -z "{SG_ID}" ] ; then
     echo -e "\e[1;33m Security Group allow-all-ports does not exist"
-    exit 3
+    exit 4
 fi
 
 AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" \
@@ -38,7 +39,7 @@ AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Pra
 
 if [ -z "${AMI_ID}" ]; then
     echo -e "\e[1;31mUnable to find Image AMI_ID\e[0m"
-    exit
+    exit 5
 else
     echo -e "\e[1;32mAMI ID = ${AMI_ID}\e[0m"
 fi
