@@ -18,7 +18,7 @@ PRIVATE_IP=$(aws ec2 describe-instances \
         --filters "Name=tag:Name,Values=${COMPONENT}" \
         --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text)
 
-if [ -z "${PRIVATE_IP}" ]; then
+if [ ! -z "${PRIVATE_IP}" ]; then
     echo  "  "
     echo -e  "\e[33mInstance ${COMPONENT} is already exists, Please check\e[0m"
     echo -e "----------------------------------------------------\n"
