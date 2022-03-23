@@ -15,8 +15,12 @@ COMPONENT="$1"
 INST_TYPE="$2"
 
 PRIVATE_IP=$(aws ec2 describe-instances \
-        --filters "Name=tag:Name,Values=${COMPONENT}" \
-        --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text)
+            | jq '.Reservations[].Instances[].PrivateIpAddress' \
+            | sed -e 's/"//g')
+
+#PRIVATE_IP=$(aws ec2 describe-instances \
+#        --filters "Name=tag:Name,Values=${COMPONENT}" \
+#        --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text)
 
 if [ ! -z "${PRIVATE_IP}" ]; then
     echo  "  "
@@ -67,7 +71,7 @@ create_ec2()  {
 }
 
 
-# IPADDRESS=$(aws ec2 describe-instances | jq '.Reservations[].Instances[].PrivateIpAddress' | sed -e 's/"//g')
+
 
 
 if [ "$1" == "all" ]; then
