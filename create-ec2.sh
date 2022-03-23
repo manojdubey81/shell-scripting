@@ -35,11 +35,11 @@ create_ec2()  {
 # IPADDRESS=$(aws ec2 describe-instances | jq '.Reservations[].Instances[].PrivateIpAddress' | sed -e 's/"//g')
 
 
-if [ "$1" == "all"]; then
-  for component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch; do
-    COMPONENT = $component
-    create_ec2()
+if [ "$1" == "all" ]; then
+  for component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch ; do
+    COMPONENT=$component
+    create_ec2
   done
 else
-  create_ec2()
+  create_ec2
 fi
