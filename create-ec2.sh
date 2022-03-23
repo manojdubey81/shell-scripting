@@ -2,7 +2,7 @@
 
 if [ -z "$1" ]; then
   echo -e '\e[32mPlease Select Machine Name:\e[0m'
-  echo -e '\e[33\t1) frontend\t\t2) catalogue\t\t 12) all\e[0m'
+  echo -e '\e[33m1) frontend\t\t2) catalogue\t\t 12) all\e[0m'
   exit 1
 fi
 
