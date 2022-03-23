@@ -30,4 +30,4 @@ Print "Restart Nginx"
 systemctl enable nginx &>>${LOG_FILE} && systemctl restart nginx &>>${LOG_FILE}
 StatusChk $? "Nginx Restart"
 
-Readymsg
+#Readymsg
