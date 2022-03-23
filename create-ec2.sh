@@ -20,7 +20,7 @@ PRIVATE_IP=$(aws ec2 describe-instances \
 
 if [ ! -z "${PRIVATE_IP}" ]; then
     echo -e  "\e[32m Instance ${COMPONENT} is already exists, Please check\e[0m"
-    exit 3
+ #   exit 3
 fi
 
 
@@ -31,6 +31,9 @@ SG_ID=$(aws ec2 describe-security-groups \
 
 if [ -z "{SG_ID}" ] ; then
     echo -e "\e[1;33m Security Group allow-all-ports does not exist"
+    exit 4
+else
+    echo -e "\e[1;32mSecurity GroupId = ${SG_ID}\e[0m"
     exit 4
 fi
 
