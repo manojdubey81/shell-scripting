@@ -22,13 +22,24 @@ SG_ID=$(aws ec2 describe-security-groups \
 AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" \
         | jq '.Images[].ImageId' | sed -e 's/"//g')
 
+create_ec2()  {
+  aws ec2 run-instances \
+        --image-id "${AMI_ID}" \
+        --instance-type "${INST_TYPE}" \
+        --security-group-ids "${SG_ID}" \
+        --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]" \
+        | jq
+}
 
-aws ec2 run-instances \
-      --image-id "${AMI_ID}" \
-      --instance-type "${INST_TYPE}" \
-      --security-group-ids "${SG_ID}" \
-      --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]" \
-      | jq
 
-IPADDRESS=$(aws ec2 describe-instances | jq '.Reservations[].Instances[].PrivateIpAddress' | sed -e 's/"//g')
+# IPADDRESS=$(aws ec2 describe-instances | jq '.Reservations[].Instances[].PrivateIpAddress' | sed -e 's/"//g')
 
+
+if [ "$1" == "all"]; then
+  for component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch; do
+    COMPONENT = $component
+    create_ec2()
+  done
+else
+  create_ec2()
+fi
