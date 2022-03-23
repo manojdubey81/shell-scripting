@@ -1,12 +1,13 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-  echo -e '\e[34mMachine Name Required\e[0m'
+  echo -e '\e[32mPlease Select Machine Name:\e[0m'
+  echo -e '\e[33 1) frontend\t\t2) catalogue\t\t 12) all\e[0m'
   exit 1
 fi
 
 if [ -z "$2" ]; then
-  echo -e '\e[34mInstance type must needed\e[0m'
+  echo -e '\e[34mProvide Instances Type like t2.micro etc..\e[0m'
   exit 2
 fi
 
@@ -21,6 +22,14 @@ SG_ID=$(aws ec2 describe-security-groups \
 
 AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" \
         | jq '.Images[].ImageId' | sed -e 's/"//g')
+
+if [ -z "${AMI_ID}" ]; then
+    echo -e "\e[1;31mUnable to find Image AMI_ID\e[0m"
+    exit
+else
+    echo -e "\e[1;32mAMI ID = ${AMI_ID}\e[0m"
+fi
+
 
 create_ec2()  {
   aws ec2 run-instances \
