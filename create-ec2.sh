@@ -19,7 +19,7 @@ PRIVATE_IP=$(aws ec2 describe-instances \
         --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text)
 
 if [ ! -z "${PRIVATE_IP}" ]; then
-    echo -e  "\e[32m Instance ${COMPONENT} is already exists, Please check\e[0m"
+    echo -e  "\e[33mInstance ${COMPONENT} is already exists, Please check\e[0m"
  #   exit 3
 fi
 
@@ -34,7 +34,6 @@ if [ -z "{SG_ID}" ] ; then
     exit 4
 else
     echo -e "\e[1;32mSecurity GroupId = ${SG_ID}\e[0m"
-    exit 4
 fi
 
 AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" \
@@ -45,6 +44,7 @@ if [ -z "${AMI_ID}" ]; then
     exit 5
 else
     echo -e "\e[1;32mAMI ID = ${AMI_ID}\e[0m"
+    exit 5
 fi
 
 
