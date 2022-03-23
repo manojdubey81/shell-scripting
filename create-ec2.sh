@@ -19,7 +19,7 @@ PRIVATE_IP=$(aws ec2 describe-instances \
         --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text)
 
 if [ ! -z "${PRIVATE_IP}" ]; then
-    echo -e  "\e[32m Instance ${COMPONENT} is already exists, Hence not creating\e[0m"
+    echo -e  "\e[32m Instance ${COMPONENT} is already exists, Please check\e[0m"
     exit 3
 fi
 
