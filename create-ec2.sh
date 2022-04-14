@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-  echo -e '\e[32mPlease Select Machine Name!!\e[0m'
+  echo -e '\e[32mPlease Select Component Name!!\e[0m'
   exit 1
 fi
 
