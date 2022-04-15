@@ -14,4 +14,4 @@ PVT_HOST_ZONE=$(aws route53 create-hosted-zone \
             --caller-reference "$(date)")
 
 echo "---------------------------------"
-echo "Pvt_hosted-zone :" ${PVT_HOST_ZONE}
+echo "Pvt_hosted-zone :" $PVT_HOST_ZONE
