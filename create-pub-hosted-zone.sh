@@ -10,3 +10,6 @@ COMPONENT=$1
 
 PUB_HOST_ZONE=$(aws route53 create-hosted-zone --name "${COMPONENT}" --caller-reference "$(date)")
 
+echo "---------------------------------"
+echo "Pub_hosted-zone :" ${PUB_HOST_ZONE}
+
