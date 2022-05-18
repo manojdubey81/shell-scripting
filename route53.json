@@ -1,11 +1,12 @@
 {
-  "Comment": "CREATE/DELETE/UPSERT a record ",
+  "Comment": "ACTION A type record in Route53 for COMPONENT",
   "Changes": [{
-    "Action": "UPSERT",
+    "Action": "ACTION",
     "ResourceRecordSet": {
-      "Name": "COMPONENT.PVT_HOSTED_ZONE",
+      "Name": "COMPONENT.roboshop.internal",
       "Type": "A",
       "TTL": 300,
       "ResourceRecords": [{ "Value": "IPADDRESS"}]
     }}]
 }
+
